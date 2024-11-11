@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-
+import { RxCross1 } from "react-icons/rx";
 
 function App() {
 
@@ -41,15 +41,22 @@ function App() {
     setSubject('');
     setHome('');
   }
+  
+
+  function onDelete(stuID) {
+    const newList = students.filter((student) => student.id !== stuID)
+    setStudents(newList);
+  }
 
 
 
   return (
     <div className="w-1/2 mx-auto">
       {students.map((student) => 
-        <div>
-          <div className="focus:outline-none mb-4 my-6 shadow-[0_3px_10px_rgb(0,0,0,0.2)] py-4 px-4 bg-white rounded-md">
+        <div key={student.id}>
+          <div className="flex justify-between focus:outline-none mb-4 my-6 shadow-[0_3px_10px_rgb(0,0,0,0.2)] py-4 px-4 bg-white rounded-md">
             {student.name}
+            <button onClick={() => onDelete(student.id) }><RxCross1 className="cursor-pointer h-5" /></button>
           </div>
         </div>)
       }
